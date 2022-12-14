@@ -82,6 +82,7 @@ a:not(.ant-pagination-item a){
 }
 
 .logo {
+  transition: 0.4s;
   width: 9.2rem;
   height: 4rem;
   margin: 5rem 3rem 3rem;
@@ -92,9 +93,11 @@ aside, ul:not(.ant-pagination, .ant-image-preview-operations), header, main {
   color: black !important;
   background-color: white !important;
 }
-aside {
+
+
+/* aside {
   min-width: 240px !important;
-}
+} */
 td p {
   margin: 0;
 }
@@ -123,17 +126,22 @@ header {
     background: transparent  !important;
     border-radius: 0  !important;
 }
-
-.ant-menu-item-active::before, .ant-menu-item-selected::before {
+.my-active-link {
+  position: relative;
+}
+.ant-menu-item-active::before, .ant-menu-item-selected::before, .my-active-link::before {
   content: "";
     position: absolute;
-    background: #1D4696;
+    background-color: #1D4696 !important;
     width: 5px;
     height: 100%;
     left: 0;
     top: 0;
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
+}
+.my-active-link::before {
+  left: -10px !important;
 }
 .ant-menu-title-content a {
   margin-left: 1rem;
@@ -143,11 +151,11 @@ header {
     transition: 0.4s;
 }
 
-.ant-menu-title-content:hover a, .ant-menu-item-selected a {
+.ant-menu-title-content:hover a, .ant-menu-item-selected a, .my-active-link {
   background-color: var(--accent-1);
   color: var(--dark) !important;
 }
-ul li:hover path, li:active path, .ant-menu-item-selected path {
+ul li:hover path, li:active path, .ant-menu-item-selected path, .my-active-link {
   fill: #1D4696 !important
 }
 
@@ -753,6 +761,52 @@ th::before {
     top: 0;
     right: 4px;
 }
+
+
+
+.my-collapsed-sidebar .logo {
+  width: auto;
+  margin: 5rem 11px 3rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.my-collapsed-sidebar li span:nth-child(2){
+  display: none !important;
+}
+.my-collapsed-sidebar .number_container{
+  /* visibility: hidden !important; */
+  position: inherit !important;
+  right:0;
+}
+.my-collapsed-sidebar .ant-menu-title-content a {
+  margin: 0;
+    padding: 0;
+    justify-content: center;
+    
+}
+
+/* .ant-tooltip-content */
+.ant-tooltip-inner {
+  color: var(--dark) !important;
+  background-color: var(--accent-1) !important;
+  /* width: fit-content !important; */
+  min-width: 100px !important;
+
+}
+.ant-tooltip-inner a{
+  display: flex;
+  grid-gap: 5px;
+}
+.ant-tooltip-inner span:nth-child(2){
+  z-index: 1;
+  background-color: var(--accent-1);
+}
+.ant-tooltip-arrow {
+  background-color: var(--accent-1) !important;
+  width: fit-content !important;
+}
+
 /* 
 .drop-over-downward {
   background-color: #1A2048 !important;
