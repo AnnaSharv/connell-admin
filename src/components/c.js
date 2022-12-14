@@ -1,0 +1,62 @@
+import { db } from "../pages/firebase";
+import { collection, addDoc, doc,  setDoc, getDoc, deleteDoc, updateDoc, increment } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "../pages/firebase";
+
+export const uploadImageAsPromise = function (img, setImgList, dbName) {
+
+    return new Promise(function (resolve, reject) {
+      const image_name = img.name + new Date().getTime();
+      const storageRef = ref(storage, image_name);
+      const uploadTask = uploadBytesResumable(storageRef, img);
+    
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+
+          switch (snapshot.state) {
+            case "paused":
+              // console.log("Upload is paused");
+              break;
+            case "running":
+               console.log("Upload is running");
+            //    setIsLoading(true)
+              break;
+            default:
+                
+              break;
+          }
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                let list = []
+                let pushToImageDB = async () => {
+              
+                const docRef = await addDoc(collection(db, "images"), {
+                    timeStamp: Date.now(),
+                    blog_image: downloadURL,
+                    blog_image_name: img.name,
+                    blog_image_size: img.size,
+                });
+
+                const countRef = doc(db, "length", "length");
+                 await updateDoc(countRef, {
+                    [dbName]: increment(1)
+                });
+            //   console.log("Document written with ID: ", docRef.id);
+              list.push(downloadURL)
+            };
+            pushToImageDB();
+            
+          });
+        }
+      );
+    });
+}
+

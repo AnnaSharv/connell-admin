@@ -1,0 +1,148 @@
+[
+    {
+        "index": 1,
+        "id": "oeIxJEN0eZNii2LOs53B",
+        "data": {
+            "blog_body": "<p>hi</p>",
+            "blog_image": "",
+            "blog_permalink": "http://localhost:3001/clare/articles/new-da",
+            "blog_type": [
+                "articles"
+            ],
+            "blog_status": "archived",
+            "timeStamp": 1669970001607,
+            "blog_title": "new day",
+            "blog_date": "Dec 2, 2022",
+            "draft_id": "a834f0f4-e31c-40c3-81b3-a4ecdbf341a9"
+        },
+        "tags": [
+            "archived"
+        ]
+    },
+    {
+        "index": 2,
+        "id": "jiiMBI1SRQHc6byAQK4n",
+        "data": {
+            "draft_id": "94031ea6-1f32-4e90-9fd9-06cb2cd2880a",
+            "timeStamp": 1669915063062,
+            "blog_type": [
+                "articles",
+                "awards"
+            ],
+            "blog_date": "Dec 1, 2022",
+            "blog_title": "BLOG PPOST FOR ANNNA",
+            "blog_status": "active",
+            "blog_permalink": "http://localhost:3001/clare/articles/BLOG-PPOST-FOR-ANNN",
+            "blog_body": "<p>casc</p>",
+            "blog_image": ""
+        },
+        "tags": [
+            "active"
+        ]
+    },
+    {
+        "index": 3,
+        "id": "wk8WklP1m2FqpOsbQKoe",
+        "data": {
+            "draft_id": "70bb2b1b-8635-4589-a6d9-86da0c00ae93",
+            "blog_body": "<p>sss</p>",
+            "blog_date": "Dec 1, 2022",
+            "blog_type": [
+                "articles",
+                "awards"
+            ],
+            "timeStamp": 1669913095322,
+            "blog_title": "1233",
+            "blog_permalink": "http://localhost:3001/clare/articles/123",
+            "blog_status": "active",
+            "blog_image": ""
+        },
+        "tags": [
+            "active"
+        ]
+    },
+    {
+        "index": 4,
+        "id": "glZB27WpG7Lg9OfahSPm",
+        "data": {
+            "blog_title": "Hello, this is my very first blog on CC",
+            "blog_date": "Dec 1, 2022",
+            "blog_permalink": "http://localhost:3001/clare/articles/",
+            "draft_id": "17c840b1-839d-4d29-b279-d4fb7f0b0437",
+            "blog_body": "<p>asasasa</p>",
+            "blog_image": "",
+            "timeStamp": 1669912814213,
+            "blog_status": "archived",
+            "blog_type": [
+                "articles",
+                "deals"
+            ]
+        },
+        "tags": [
+            "archived"
+        ]
+    },
+    {
+        "index": 5,
+        "id": "x8odc83qjXdZxNPALxAD",
+        "data": {
+            "blog_type": [
+                "articles",
+                "awards"
+            ],
+            "timeStamp": 1669909338840,
+            "blog_image": "",
+            "blog_permalink": "http://localhost:3001/clare/articles/",
+            "draft_id": "7f1ddc55-2b69-4ec5-8e0f-a7d3529d69d7",
+            "blog_date": "Dec 1, 2022",
+            "blog_status": "archived",
+            "blog_body": "<p>ggg</p>",
+            "blog_title": "Hello, this is my very first blog on CC"
+        },
+        "tags": [
+            "archived"
+        ]
+    },
+    {
+        "index": 6,
+        "id": "aSQLEE1GE8hevmHKPBIt",
+        "data": {
+            "blog_type": [
+                "articles",
+                "awards"
+            ],
+            "blog_image": "",
+            "draft_id": "7f1ddc55-2b69-4ec5-8e0f-a7d3529d69d7",
+            "blog_body": "<p>ggg</p>",
+            "blog_title": "Hello, this is my very first blog on CC",
+            "blog_status": "active",
+            "blog_date": "Dec 1, 2022",
+            "timeStamp": 1669908774434,
+            "blog_permalink": "http://localhost:3001/clare/articles/"
+        },
+        "tags": [
+            "active"
+        ]
+    },
+    {
+        "index": 7,
+        "id": "au0R3hw2qzSbbSvw9fOl",
+        "data": {
+            "blog_status": "archived",
+            "timeStamp": 1669908550341,
+            "draft_id": "1fbf8169-6d15-4937-bd4a-a17ccdf101ec",
+            "blog_title": "deals",
+            "blog_permalink": "http://localhost:3001/clare/articles,deals/deal",
+            "blog_type": [
+                "articles",
+                "deals"
+            ],
+            "blog_body": "<p>hi</p>",
+            "blog_date": "Dec 1, 2022",
+            "blog_image": ""
+        },
+        "tags": [
+            "archived"
+        ]
+    }
+]
