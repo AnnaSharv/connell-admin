@@ -206,7 +206,7 @@ const items = [
     
     style={{
       overflow: "auto",
-      height: "auto",
+      height: "100vh",
       // position: "fixed",
       left: 0,
       top: 0,
