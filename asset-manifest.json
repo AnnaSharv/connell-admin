@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/connell-admin/static/css/main.ea5162be.css",
-    "main.js": "/connell-admin/static/js/main.91da2362.js",
+    "main.css": "/connell-admin/static/css/main.b97f2b62.css",
+    "main.js": "/connell-admin/static/js/main.8366a344.js",
     "static/media/Poppins-Regular.ttf": "/connell-admin/static/media/Poppins-Regular.35d26b781dc5fda684cc.ttf",
     "static/media/Poppins-Bold.ttf": "/connell-admin/static/media/Poppins-Bold.cdb29a5d7ccf57ff05a3.ttf",
     "static/media/Connell_logo.svg": "/connell-admin/static/media/Connell_logo.f4bc72f7d0034707ab1d.svg",
@@ -19,11 +19,11 @@
     "static/media/Vector-5.svg": "/connell-admin/static/media/Vector-5.b72ee3658182d21e24339f8d0e8f39ee.svg",
     "index.html": "/connell-admin/index.html",
     "static/media/dots.svg": "/connell-admin/static/media/dots.53f746c717ca24a9739f3bcbb1f9fa65.svg",
-    "main.ea5162be.css.map": "/connell-admin/static/css/main.ea5162be.css.map",
-    "main.91da2362.js.map": "/connell-admin/static/js/main.91da2362.js.map"
+    "main.b97f2b62.css.map": "/connell-admin/static/css/main.b97f2b62.css.map",
+    "main.8366a344.js.map": "/connell-admin/static/js/main.8366a344.js.map"
   },
   "entrypoints": [
-    "static/css/main.ea5162be.css",
-    "static/js/main.91da2362.js"
+    "static/css/main.b97f2b62.css",
+    "static/js/main.8366a344.js"
   ]
 }
