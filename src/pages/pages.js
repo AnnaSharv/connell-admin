@@ -2,7 +2,7 @@ import React from 'react'
 
 function Pages() {
   return (
-    <div>pages</div>
+    <div>Under development</div>
   )
 }
 

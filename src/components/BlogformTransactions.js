@@ -15,7 +15,7 @@ import Edit from '../assets/icons/edit.svg'
 import ModalDelete from './modalDelete';
 import ModalDuplicate from './modalDuplicate';
 import ModalPreview from './modalPreview';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import SelectwithSearch from './SelectwithSearch';
 import UploadfromGallery from './UploadfromGallery';
 
@@ -25,8 +25,8 @@ import UploadfromGallery from './UploadfromGallery';
 function BlogformTransactions({permaLink, setPermaLink, cat}) {
  const {pathname} = useLocation()
     const website_domain = "http://localhost:3001/clare"
-    const adminDomain = "http://localhost:3000"
-
+    const adminDomain = "https://e098-62-212-46-45.eu.ngrok.io/"
+    let navigate = useNavigate();
     const [myid, setmyid] = useState(uuid())
     const [blogsAll, setBlogsAll] = useState([])
     const [blogActiveTitle, setBlogActiveTitle] = useState([])
@@ -200,6 +200,7 @@ function BlogformTransactions({permaLink, setPermaLink, cat}) {
        
       let data, merge;
       if(pathname.includes("addTransaction/edit")) {
+        console.log("edit")
         docId = docId[docId.length-1]
         data = {
 
@@ -213,6 +214,7 @@ function BlogformTransactions({permaLink, setPermaLink, cat}) {
         }
         merge = true
       } else {
+        console.log("no edit")
         docId = myid
         data = {
             timeStamp: Date.now(),
@@ -230,7 +232,10 @@ function BlogformTransactions({permaLink, setPermaLink, cat}) {
             transactions_image_size: transactionsImg.size ,
             transactions_date: vals.transactions_date ,
         }
-
+        const countRef = doc(db, "length", "length");
+        await updateDoc(countRef, {
+           transactions: increment(1)
+       }) ;
         merge = false
       }
        
@@ -238,11 +243,10 @@ function BlogformTransactions({permaLink, setPermaLink, cat}) {
         try {
             await setDoc(doc(db, "transactions", docId ), data, {merge:merge}); 
             setIsDraft(false)
-            window.location.href = adminDomain + "/transactions";
-            const countRef = doc(db, "length", "length");
-             await updateDoc(countRef, {
-                transactions: increment(1)
-            }) ;
+            //window.location.href = adminDomain + "/transactions";
+            //window.location.href = "https://annasharv.github.io/transactions";
+            navigate(-1)
+           
 
 
             //draftidan amoshla

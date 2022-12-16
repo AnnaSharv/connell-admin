@@ -26,11 +26,17 @@ const ModalDelete = ({docId, dbName, setBlogsAll, redirect, decrementfield}) => 
           setOpen(false)
           const del = async () => {
             await deleteDoc(doc(db, dbName, docId));
+          //  if(redirect) {
+          //   dbName === "team" 
+          //   ? window.location.href = adminDomain + "/members"
+          //   : dbName === "transactions" ? window.location.href = adminDomain + "/transactions" 
+          //   : window.location.href = adminDomain + "/bloglist/all"
+          //  }
            if(redirect) {
             dbName === "team" 
-            ? window.location.href = adminDomain + "/members"
+            ? navigate(-1)
             : dbName === "transactions" ? window.location.href = adminDomain + "/transactions" 
-            : window.location.href = adminDomain + "/bloglist/all"
+            : navigate(-1)
            }
             
           }

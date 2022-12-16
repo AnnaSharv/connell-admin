@@ -213,7 +213,7 @@ if(record.transactions_status === "archived") {
       {
         title: 'ID',
         // dataIndex: 'id',
-        width: "7%",
+        // width: "7%",
         render: (data) => {
         
           return <span>{c++}</span>
@@ -222,7 +222,8 @@ if(record.transactions_status === "archived") {
       {
         title: 'Image',
         // sorter:true,
-        render: (data) => <div style={{"cursor":"pointer"}}> {contextHolder} <img src={data.transactions_image} width="50px"/></div> 
+        render: (data) => <div style={{"cursor":"pointer"}}> {contextHolder} <img src={data.transactions_image} width="50px"/></div>, 
+        responsive: ['sm']
       },
       {
         title: 'Year',
@@ -235,7 +236,7 @@ if(record.transactions_status === "archived") {
       },
       {
         title: 'Description',
-        width: "30%",
+        // width: "30%",
         render: (data) => <Link  to={`/addTransaction/edit/transaction_id=${data.id}`}  className={data?.transactions_title?.length >= 35 ? "text-elipse" : null}>  {data.transactions_title} </Link> 
       },
       {

@@ -21,11 +21,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import UploadfromGallery from './UploadfromGallery';
 
 
-
 function Blogform({permaLink, setPermaLink, cat}) {
  const {pathname} = useLocation()
+ let navigate = useNavigate()
     const website_domain = "http://localhost:3001/clare"
-    const adminDomain = "http://localhost:3000"
+     const adminDomain = "https://e098-62-212-46-45.eu.ngrok.io/"
+  
 
     const [myid, setmyid] = useState(uuid())
     const formRef = useRef()
@@ -471,9 +472,10 @@ function Blogform({permaLink, setPermaLink, cat}) {
                 blogs: increment(1)
             });
             setIsDraft(false)
-           window.location.href = adminDomain + "/bloglist/all";
+           //window.location.href = adminDomain + "/bloglist/all";
+           //window.location.href = "https://annasharv.github.io/bloglist/all";
 
-         
+         navigate(-1)
 
 
             //draftidan amoshla

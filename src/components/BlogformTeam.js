@@ -26,8 +26,8 @@ import UploadfromGallery from './UploadfromGallery';
 function Blogform({permaLink, setPermaLink, cat}) {
  const {pathname} = useLocation()
     const website_domain = "http://localhost:3001/clare"
-    const adminDomain = "http://localhost:3000"
-
+    const adminDomain = "https://e098-62-212-46-45.eu.ngrok.io/"
+const navigate = useNavigate()
     const [myid, setmyid] = useState(uuid())
     const formRef = useRef()
     const [ufd, setUFD] = useState(true)
@@ -318,8 +318,9 @@ function Blogform({permaLink, setPermaLink, cat}) {
             !currId && await updateDoc(countRef, {
                 team: increment(1)
             });
-            window.location.href = adminDomain + "/members";
-            
+           // window.location.href = adminDomain + "/members";
+           // window.location.href = "https://annasharv.github.io/members";
+           navigate(-1)
 
 
             //draftidan amoshla
