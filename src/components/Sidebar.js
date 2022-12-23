@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useLocation } from 'react-router-dom'
+import React, { useEffect, useRef, useState, useContext } from "react";
+import { Navigate, useLocation } from 'react-router-dom'
 import { collection, addDoc, doc,  setDoc, getDoc,  getDocs, deleteDoc, increment, updateDoc, onSnapshot } from "firebase/firestore";
-
+import { auth } from "../pages/firebase";
+import LogoutModal from '../components/LogoutModal.js'
 import {db} from '../pages/firebase'
 import icon1 from "../assets/icons/Group 8.svg"
 import icon2 from "../assets/icons/Vector-1.svg"
@@ -17,6 +18,8 @@ import { Link } from "react-router-dom";
 
 import { Layout, Menu } from "antd";
 import Searchbar from "./Searchbar";
+import { signOut } from "firebase/auth";
+import { UserContext } from "../pages/UserContext";
 const { Header, Content, Footer, Sider } = Layout;
 
 
@@ -63,48 +66,54 @@ const { Header, Content, Footer, Sider } = Layout;
 
 function Sidebar(props) {
   const sidebar = useRef()
- const [length, setLength] = useState([])
-const [gl,setgl] = useState(null)
-const {pathname} = useLocation()
-const [collapsed, setcollapsed] = useState(false)
-useEffect(() => {
- 
-    
-  const countRef = collection(db, "length");
-  const unsub = onSnapshot(countRef, (snapShot) => {
-      let list = [];
+  const {useStatus, setUserStatus} = useContext(UserContext)
+  const [length, setLength] = useState([])
+  const [gl,setgl] = useState(null)
+  const {pathname} = useLocation()
+  const [collapsed, setcollapsed] = useState(false)
+  useEffect(() => {
+  
       
-      snapShot.docs.forEach((doc) => {
-        list.push({
-          blogs: doc.data().blogs,
-          team: doc.data().team,
-          transactions: doc.data().transactions,
-          gallery: doc.data().gallery
-        });
-      })
-      setLength(list)
-     
-    });
-
-    return () =>  unsub() 
-}, [])
-useEffect(() => {
- 
-    
-  const countRef = collection(db, "images");
-  const unsub = onSnapshot(countRef, (snapShot) => {
-      let list = [];
+    const countRef = collection(db, "length");
+    const unsub = onSnapshot(countRef, (snapShot) => {
+        let list = [];
+        
+        snapShot.docs.forEach((doc) => {
+          list.push({
+            blogs: doc.data().blogs,
+            team: doc.data().team,
+            transactions: doc.data().transactions,
+            gallery: doc.data().gallery
+          });
+        })
+        setLength(list)
       
-      snapShot.docs.forEach((doc) => {
-        list.push(doc);
-      })
-      setgl(list)
-     
-    });
+      });
+      return () =>  unsub() 
+  }, [])
+  useEffect(() => {
+  
+      
+    const countRef = collection(db, "images");
+    const unsub = onSnapshot(countRef, (snapShot) => {
+        let list = [];
+        
+        snapShot.docs.forEach((doc) => {
+          list.push(doc);
+        })
+        setgl(list)
+      
+      });
 
-    return () =>  unsub() 
-}, [])
+      return () =>  unsub() 
+  }, [])
 
+
+  const logout = async () => {
+    signOut(auth)
+    setUserStatus(false)
+    console.log("LOGOUT")
+  }
 
 
 
@@ -130,16 +139,18 @@ const items = [
           //     ),
           //     key: '2',
           // },
-          {
-            label: (
-              <Link to="pages" rel="noopener noreferrer" className={pathname.includes("pages") ?  "my-active-link" : null}>
-           <span><img src={icon6} /></span>  
-           <span>Pages</span> 
-           <span className="number_container">?</span>
-          </Link>
-        ),
-        key: '3',
-      },
+
+          //PAGES
+      // {
+      //       label: (
+      //         <Link to="pages" rel="noopener noreferrer" className={pathname.includes("pages") ?  "my-active-link" : null}>
+      //      <span><img src={icon6} /></span>  
+      //      <span>Pages</span> 
+      //      <span className="number_container">?</span>
+      //     </Link>
+      //   ),
+      //   key: '3',
+      // },
       {
         label: (
           <Link to="bloglist/all"  rel="noopener noreferrer" className={pathname.toLocaleLowerCase().includes("blog")  ?  "my-active-link" : null} >
@@ -185,10 +196,11 @@ const items = [
       },
       {
         label: (
-          <Link to="logout" rel="noopener noreferrer">
+          <div className="logoutWrapper">
            <span><img src={icon4} /></span>  
-           <span>Log out </span> 
-          </Link>
+           {/* <span>Log out </span>  */}
+           <LogoutModal logout={logout}/>
+          </div>
         ),
         key: '8',
       },
@@ -312,14 +324,12 @@ const items = [
       <Content
         style={{
           marginLeft: "20px",
+          // marginTop: "50px",
           overflow: "initial",
         }}
       >
-        <div
-          className="site-layout-background content"
-          
-        >
-          {props.children}
+        <div className="site-layout-background content">
+          {props.children} 
         </div>
       </Content>
 

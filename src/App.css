@@ -109,10 +109,7 @@ header, main {
 header {
   margin-block: 3rem 6rem;
 }
-.ant-menu-title-content a {
-  display: flex;
-  grid-gap: 0.8rem;
-}
+
 
 
 
@@ -143,12 +140,16 @@ header {
 .my-active-link::before {
   left: -10px !important;
 }
-.ant-menu-title-content a {
+
+.ant-menu-title-content a, .logoutWrapper{
+  display: flex;
+  align-items: center;
+  grid-gap: 0.8rem;
   margin-left: 1rem;
-    padding-left: 2rem;
-    height: 3rem;
-    border-radius: 0.6rem;
-    transition: 0.4s;
+  padding-left: 2rem;
+  height: 3rem;
+  border-radius: 0.6rem;
+  transition: 0.4s;
 }
 
 .ant-menu-title-content:hover a, .ant-menu-item-selected a, .my-active-link {
@@ -174,9 +175,8 @@ ul li:hover path, li:active path, .ant-menu-item-selected path, .my-active-link 
   border-radius: 4px;
 }
 
-.divider-top {
-  position: relative;
-}
+
+
 
 
 
@@ -185,27 +185,40 @@ ul li:hover path, li:active path, .ant-menu-item-selected path, .my-active-link 
   position: relative;
   overflow: hidden;
 }
+
+
+/* divider */
+
+.divider-top {
+  position: relative;
+}
 .ant-menu::before, .ant-menu::after {
   content: " ";
   background-color: var(--main-2-opacity);
   width: 100vw;
   height: 1px;
   position: absolute;
-  top: 6rem;
+  bottom: 6.5rem;
 }
-
 .ant-menu::after {
   top: 40rem;
 }
-
-/* jojo */
-.ant-menu li:nth-child(1), .ant-menu li:nth-child(7) {
-  margin-bottom: 6rem !important;
+.ant-menu li:nth-child(5) {
+  margin-top: 4rem !important;
 }
 
 
 .searchBar {
   position: relative;
+  z-index: 1;
+}
+.searchBar ul li{
+  background-color: var(--accent-1);
+}
+.searchBar  .ant-divider-with-text {
+  margin:0 !important;
+  padding:16px;
+  background-color: var(--accent-1);
 }
 .searchBar img {
   position: absolute;
@@ -805,6 +818,20 @@ th::before {
 .ant-tooltip-arrow {
   background-color: var(--accent-1) !important;
   width: fit-content !important;
+}
+
+
+
+.searchBar .ant-select-selector {
+  align-items: center;
+  height: 64px !important;
+}
+.searchBar .ant-select-selector input{
+  height: 100% !important;
+}
+.searchBar .ant-select-selector .ant-select-selection-placeholder {
+  font-family: PoppinsReg !important;
+  color: #9da5b3 !important;
 }
 
 /* 

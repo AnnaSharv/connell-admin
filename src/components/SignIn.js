@@ -1,17 +1,33 @@
-import React from 'react';
+import React, {useRef, useContext, useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { UserAuth } from '../context';
 
-
-import { signInWithEmailAndPassword } from "firebase/auth";
-import {auth} from '../pages/firebase'
+import { UserContext } from '../pages/UserContext';
 
 export const SignIn = () => {
   const navigate = useNavigate()
+  const {userStatus, setUserStatus} = useContext(UserContext)
+  const [errorMessage, setErrorMessage] = useState(null)
+  const {signIn} = UserAuth()
+  
+ 
+
+  const login = async (email, password) => {
+    try {
+      await signIn(email, password)
+      setUserStatus(true)
+      navigate("/bloglist/all")
+    } catch(err) {
+      setErrorMessage(err.message)
+    }
+   
+  }
+  
 
   return (
-    <Formik
+    <Formik 
        initialValues={{ password: '', email: '' }}
        validationSchema={Yup.object({
          password: Yup.string()
@@ -23,18 +39,8 @@ export const SignIn = () => {
          email: Yup.string().email('Invalid email address').required('Required'),
        })}
        onSubmit={(values, { setSubmitting }) => {
-        signInWithEmailAndPassword(auth, values.email, values.password)
-        .then((userCredential) => {
-          // Signed in 
-          const user = userCredential.user;
-          navigate('/dashboard')
-          setSubmitting(false)
-          // ...
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-        });
+        const {email, password} = values;
+        login(email, password)
        }}
      >
        <Form>
@@ -46,7 +52,11 @@ export const SignIn = () => {
          <Field name="password" type="password" className="form-control" />
          <ErrorMessage name="password" />
  
-         <button type="submit" className='btn btn-primary mt-3 w-100'>Log in</button>
+
+         <div className='text-danger'>{errorMessage}</div>
+         <button type="submit" className='btn btn-primary mt-3 w-100 fs-4'>Log in</button>
+
+         
        </Form>
      </Formik>
   );
