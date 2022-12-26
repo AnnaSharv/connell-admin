@@ -45,11 +45,11 @@ export const SignIn = () => {
      >
        <Form>
          <label htmlFor="password">Admin email</label>
-         <Field name="email" type="email" className="form-control w-100" />
+         <Field name="email" type="email" className="form-control w-100" placeholder="admin@admin.com"/>
          <ErrorMessage name="email" />
  
          <label htmlFor="password">Admin password</label>
-         <Field name="password" type="password" className="form-control" />
+         <Field name="password" type="password" className="form-control" placeholder="123456"/>
          <ErrorMessage name="password" />
  
 
