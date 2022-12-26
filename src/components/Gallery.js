@@ -15,7 +15,8 @@ import { storage } from "../pages/firebase";
 import { db } from "../pages/firebase";
 import { motion } from "framer-motion";
 import { uploadImageAsPromise } from "./c";
-import { MotionConfig } from "framer-motion";
+import { MotionConfig } from "framer-motion"
+import ProgressBar from "./Progress";
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -32,6 +33,10 @@ const Gallery = ({ setblogsLength, blogslength}) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
+  const [isUploading, setIsUploading] = useState({
+    status: false,
+    progress: 0
+  })
   const [blogsAll, setBlogsAll] = useState([]);
   const [loading, isLoading] = useState(false);
   const handleCancel = () => setPreviewOpen(false);
@@ -65,6 +70,8 @@ const Gallery = ({ setblogsLength, blogslength}) => {
 
 
   return (
+    <>
+      <ProgressBar data={isUploading}/>
     <div className="gallery-wrapper">
       <div className="upload-button" onClick={() => galleryImg.current.click()}>
         <PlusOutlined />
@@ -75,7 +82,10 @@ const Gallery = ({ setblogsLength, blogslength}) => {
         >
           Upload
         </div>
+
+        
       </div>
+     
       <input
         type="file"
         ref={galleryImg}
@@ -83,16 +93,25 @@ const Gallery = ({ setblogsLength, blogslength}) => {
         multiple
         onChange={(e) => {
           setnum(e.target.files.length);
+       
          if(e.target.files) {
           for (var i = 0; i < e.target.files.length; i++) {
             var imageFile = e.target.files[i];
-            uploadImageAsPromise(imageFile, isLoading, "gallery");
+            uploadImageAsPromise(imageFile, isLoading, "gallery", setIsUploading, isUploading);
           }
+       
+        
          }
         }}
       />
-     
-        <Image.PreviewGroup ref={prev}>
+   
+
+   {/* <Image
+        preview={false}
+        src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM="
+       hidden={isUploading.status ? false : true}
+      /> */}
+        <Image.PreviewGroup >
    
 
           {blogsAll.length > 0 &&
@@ -112,7 +131,7 @@ const Gallery = ({ setblogsLength, blogslength}) => {
                     placeholder={
                       <Image
                         preview={false}
-                        src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png?x-oss-process=image/blur,r_50,s_50/quality,q_1/resize,m_mfit,h_200,w_200"
+                        src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM="
                         width={200}
                       />
                     }
@@ -124,6 +143,7 @@ const Gallery = ({ setblogsLength, blogslength}) => {
         </Image.PreviewGroup>
      
     </div>
+    </>
   );
 };
 export default Gallery;

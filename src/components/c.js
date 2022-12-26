@@ -3,7 +3,7 @@ import { collection, addDoc, doc,  setDoc, getDoc, deleteDoc, updateDoc, increme
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../pages/firebase";
 
-export const uploadImageAsPromise = function (img, setImgList, dbName) {
+export const uploadImageAsPromise = function (img, setImgList, dbName, setIsUploading, isUploading) {
 
     return new Promise(function (resolve, reject) {
       const image_name = img.name + new Date().getTime();
@@ -16,7 +16,7 @@ export const uploadImageAsPromise = function (img, setImgList, dbName) {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-
+            setIsUploading({...isUploading, status: true, progress: progress})
           switch (snapshot.state) {
             case "paused":
               // console.log("Upload is paused");
@@ -50,6 +50,7 @@ export const uploadImageAsPromise = function (img, setImgList, dbName) {
                     [dbName]: increment(1)
                 });
             //   console.log("Document written with ID: ", docRef.id);
+             setIsUploading({isUploading, status: false})
               list.push(downloadURL)
             };
             pushToImageDB();
