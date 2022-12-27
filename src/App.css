@@ -661,13 +661,43 @@ th::before {
   font-family: PoppinsBol !important;
 } 
 
+
+/* gallery */
+.mask-info {
+  display: flex;
+  flex-direction: column;
+}
+.x:hover .gallery-action-btn{
+  opacity: 1;
+}
+.gallery-action-btn {
+  display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 75px;
+    justify-content: center;
+    position: absolute;
+    z-index: 1;
+    top: 36%;
+}
+.gallery-action-btn.btn-danger {
+    top: 52%;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 0.4s;
+    opacity: 0;
+}
+.x:hover .mask-info {
+  opacity: 1 !important;
+}
 .gallery-wrapper {
   display: flex !important;
   flex-wrap: wrap;
   padding: 30px;
   background: white;
   border-radius: 6px;
-  grid-gap: 30px;
+  /* grid-gap: 30px; */
+  grid-gap: 1vw;
 }
 
 .gallery-wrapper  .ant-image-img {
@@ -677,26 +707,17 @@ th::before {
   object-fit: cover;
   object-position: center top;
 }
+.ant-modal-mask{
+  opacity:0.1 !important;
 
-.delete-icon-gallery {
-    display: none;
-    justify-content: center;
-    position: absolute;
-    /* z-index: -1; */
-    top: 50%;
-    /* transform: translateX(-5px); */
-    width: 100%;
-    color: white;
-    align-items: center;
-    grid-gap: 4px;
-    margin-top: 12px;
-    transition: 1s;
 }
-.x:hover .delete-icon-gallery {
-  z-index: 111 !important;
-  display: flex;
+.ant-modal-content {
+  box-shadow: none;
 }
+
+
 .upload-button {
+  cursor: pointer;
   width: 220px;
     height: 220px;
     background: whitesmoke;
@@ -800,12 +821,18 @@ th::before {
 }
 
 /* .ant-tooltip-content */
+
+.my-collapsed-sidebar ~ section {
+  margin-left: 80px !important;
+}
 .ant-tooltip-inner {
   color: var(--dark) !important;
   background-color: var(--accent-1) !important;
   /* width: fit-content !important; */
   min-width: 100px !important;
-
+}
+.ant-tooltip-inner .logoutWrapper {
+  padding:0;
 }
 .ant-tooltip-inner a{
   display: flex;

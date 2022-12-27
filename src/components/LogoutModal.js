@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal, Space } from 'antd';
-
+import icon4 from "../assets/icons/Vector-3.svg"
 const LogoutModal = (props) => {
   const [open, setOpen] = useState(false);
   const showModal = () => {
@@ -11,9 +11,10 @@ const LogoutModal = (props) => {
   };
   return (
     <>
-      <span onClick={showModal}>
-        Log out
-      </span>
+      <div onClick={showModal}>
+        <img src={icon4} style={{marginRight: "0.8rem"}}/> 
+        <span>Log out</span> 
+      </div>
       <Modal
         // title="Modal"
         open={open}
@@ -24,8 +25,9 @@ const LogoutModal = (props) => {
         onCancel={hideModal}
         okText="Sign out"
         cancelText="Cancel"
+       
       >
-        <p>Log out?</p>
+        <p> Log out?</p>
       </Modal>
     </>
   );

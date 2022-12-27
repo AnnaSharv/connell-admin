@@ -1,8 +1,8 @@
 import { db } from "../pages/firebase";
 import { collection, addDoc, doc,  setDoc, getDoc, deleteDoc, updateDoc, increment } from "firebase/firestore";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL, getStorage,  deleteObject  } from "firebase/storage";
 import { storage } from "../pages/firebase";
-
+import { uuidv4 as uuid } from "@firebase/util";
 export const uploadImageAsPromise = function (img, setImgList, dbName, setIsUploading, isUploading) {
 
     return new Promise(function (resolve, reject) {
@@ -41,7 +41,7 @@ export const uploadImageAsPromise = function (img, setImgList, dbName, setIsUplo
                 const docRef = await addDoc(collection(db, "images"), {
                     timeStamp: Date.now(),
                     blog_image: downloadURL,
-                    blog_image_name: img.name,
+                    blog_image_name: image_name,
                     blog_image_size: img.size,
                 });
 
@@ -60,4 +60,25 @@ export const uploadImageAsPromise = function (img, setImgList, dbName, setIsUplo
       );
     });
 }
+
+
+export const deleteFromStorage = async function (file) {
+  console.log(file)
+  const storage = getStorage();
+  const desertRef = ref(storage, `${file}`);
+
+// Delete the file
+deleteObject(desertRef).then(() => {
+  console.log("File deleted successfully", file)
+}).catch((error) => {
+  console.log("error", error)
+});
+
+
+
+// 
+ //deleteDoc(doc(db, "images", file));
+
+}
+
 

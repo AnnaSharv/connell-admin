@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { DeleteOutlined, MoreOutlined, PlusOutlined } from "@ant-design/icons";
-import { Modal, Upload, Image, Spin } from "antd";
+import { DeleteOutlined, MoreOutlined, PlusOutlined, EyeOutlined } from "@ant-design/icons";
+import { Modal, Upload, Image, Spin, Button } from "antd";
 import {
   collection,
   getDocs,
@@ -11,10 +11,13 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc,  setDoc, getDoc, deleteDoc, updateDoc, increment } from "firebase/firestore";
+
+
 import { storage } from "../pages/firebase";
 import { db } from "../pages/firebase";
 import { motion } from "framer-motion";
-import { uploadImageAsPromise } from "./c";
+import { uploadImageAsPromise, deleteFromStorage } from "./c";
 import { MotionConfig } from "framer-motion"
 import ProgressBar from "./Progress";
 const getBase64 = (file) =>
@@ -28,6 +31,7 @@ const getBase64 = (file) =>
 const Gallery = ({ setblogsLength, blogslength}) => {
   const types = ['image/png', 'image/jpeg']
   const galleryImg = useRef();
+  const [open, setOpen] = useState(false);
   const prev = useRef();
   const [num, setnum] = useState(null);
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -67,7 +71,12 @@ const Gallery = ({ setblogsLength, blogslength}) => {
     return () => unsub();
   }, []);
 
-
+  const showModal = () => {
+    setOpen(true);
+  };
+  const hideModal = () => {
+    setOpen(false);
+  };
 
   return (
     <>
@@ -113,17 +122,43 @@ const Gallery = ({ setblogsLength, blogslength}) => {
       /> */}
         <Image.PreviewGroup >
    
-
           {blogsAll.length > 0 &&
             blogsAll.map((blog, i) => {
               return (
                 <motion.div layout className="x" key={i} style={{"position": "relative"}}>
-                  {/* <div className="delete-icon-gallery">
-                  <DeleteOutlined />
-                   <span>Delete</span> 
-                  </div> */}
                   
+                 
+                 <div type="primary" className="gallery-action-btn btn btn-danger" onClick={showModal}>  <DeleteOutlined /> Delete </div>
+
+                 <Modal
+                  style={{"boxShadow": "none"}}
+                    title="Delete from gallery"
+                    open={open}
+                    onOk={() => {
+                      hideModal()
+                      deleteFromStorage(blog.blog_image_name)
+                      async function del() {
+                        await deleteDoc(doc(db, "images", blog.id));
+                      }
+                      del()
+                      console.log(blog.blog_image_name, blog.id)
+                    }}
+                    
+                    onCancel={hideModal}
+                    okText="Delete"
+                    cancelText="Cancel"
+                  >
+                    <p>This action will delete file permantently</p>
+                  </Modal>
                   <Image
+                
+                  preview={{
+                    maskClassName: "string",
+                    mask: <>
+                    <div className="button btn btn-primary gallery-action-btn"><EyeOutlined /> Preview</div>
+                    </>,
+                    maskClassName: "mask-info"
+                  }}
                     src={blog.blog_image}
                     key={i}
                     title={blog.blog_image_name}

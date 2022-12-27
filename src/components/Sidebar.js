@@ -197,7 +197,7 @@ const items = [
       {
         label: (
           <div className="logoutWrapper">
-           <span><img src={icon4} /></span>  
+           {/* <span><img src={icon4} /></span>   */}
            {/* <span>Log out </span>  */}
            <LogoutModal logout={logout}/>
           </div>
@@ -219,7 +219,8 @@ const items = [
     style={{
       overflow: "auto",
       height: "100vh",
-      // position: "fixed",
+      position: "fixed",
+      zIndex: 2,
       left: 0,
       top: 0,
       bottom: 0,
@@ -309,9 +310,11 @@ const items = [
     </Sider>
     <Layout
       className="site-layout"
-      // style={{
-      //   marginLeft: 240,
-      // }}
+      style={{
+        marginLeft: 240,
+        transition: "0.4s"
+
+      }}
     >
       <Header
         className="site-layout-background"
