@@ -212,6 +212,9 @@ ul li:hover path, li:active path, .ant-menu-item-selected path, .my-active-link 
   position: relative;
   z-index: 1;
 }
+.searchBar #scrollableDiv{
+  background-color: white ;
+}
 .searchBar ul li{
   background-color: var(--accent-1);
 }
