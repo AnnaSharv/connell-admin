@@ -18,12 +18,13 @@ function BlogList(props) {
   const [blogsTransactions, setBlogsTransactions] = useState([]);
   const [myQuery, setmyQuery] = useState(pathname);
   const [filterKeyword, setFilterKeyword] = useState("");
-
+  const [loading, setLoading] = useState(false);
 
 
   useEffect(() => {
     let blogsAll_temp = [];
-
+    console.log("startttt")
+    setLoading(true)
     let locationRaw = pathname.split("/");
     locationRaw = locationRaw[locationRaw.length - 1];
 
@@ -102,6 +103,8 @@ function BlogList(props) {
           list.push({id: doc.id, ...doc.data()})  
         })
         setBlogsAll(list)
+        setLoading(false)
+        console.log("finishhhh")
 
       });
     
@@ -203,17 +206,17 @@ if (pathname.includes("bloglist")) {
         />
 
         {props.cat === "team" && 
-        <TableDraggable blogsAll={blogsAll} setBlogsAll={setBlogsAll}/>
+        <TableDraggable blogsAll={blogsAll} setBlogsAll={setBlogsAll} loading={loading}/>
         }
      
         
         {props.cat === "blogs" &&
-        <MyTable blogsAll={blogsAll} setBlogsAll={setBlogsAll} cat={props.cat}/>
+        <MyTable blogsAll={blogsAll} setBlogsAll={setBlogsAll} cat={props.cat} loading={loading}/>
         }
        
        {
         props.cat === "transactions" &&
-          <MyTable blogsAll={blogsAll} setBlogsAll={blogsTransactions} cat={props.cat} filter={"transactions"}/>
+          <MyTable blogsAll={blogsAll} setBlogsAll={blogsTransactions} cat={props.cat} filter={"transactions"} loading={loading}/>
        }
        
       </div>

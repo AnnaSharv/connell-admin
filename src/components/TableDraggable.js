@@ -23,7 +23,7 @@ const type = 'DraggableBodyRow';
 
 
 
-const TableDraggable = (props) => {
+const TableDraggable = ({loading}) => {
   let tableRef = useRef()
   const location = useLocation()
   const [crec, setcrec] = useState([])
@@ -270,6 +270,7 @@ function handleClick() {
 
       <DndProvider backend={HTML5Backend}>
         <Table
+        loading={loading}
           ref={tableRef}
           columns={columns}
           rowKey={(record) => record.id + Math.random()}

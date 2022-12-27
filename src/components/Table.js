@@ -16,7 +16,7 @@ import NOIMG from '../assets/noimg.jpg'
 
 
 
-const MyTable = ({blogsAll, setBlogsAll, cat, filter}) => {
+const MyTable = ({blogsAll, setBlogsAll, cat, filter, loading}) => {
   
   const {pathname} = useLocation()
   const [crec, setcrec] = useState([])
@@ -296,7 +296,7 @@ if(record.transactions_status === "archived") {
 
 
 
-  const [loading, setLoading] = useState(false);
+  
   const [tableParams, setTableParams] = useState({
     pagination: {
       current: 1,
@@ -314,13 +314,12 @@ if(record.transactions_status === "archived") {
 
 
 
-
   return (
     <>
-      <Table
+    <Table
         columns={columns}
         rowKey={(record) => record.id + Math.random()}
-        dataSource={ blogsAll || null}
+        dataSource={blogsAll || null}
         pagination={tableParams.pagination}
         loading={loading}
         onChange={handleTableChange}
