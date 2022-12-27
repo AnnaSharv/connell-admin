@@ -19,7 +19,7 @@ import { db } from "../pages/firebase";
 import { motion } from "framer-motion";
 import { uploadImageAsPromise, deleteFromStorage } from "./c";
 import { MotionConfig } from "framer-motion"
-import NOIMG from '../assets/noimg.jpg'
+import ImgPlaceholder from '../assets/imgplaceholder.png'
 import ProgressBar from "./Progress";
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
@@ -109,7 +109,7 @@ const Gallery = ({ setblogsLength, blogslength}) => {
 
         <Image
             preview={false}
-            src={NOIMG}
+            src={"https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM="}
             hidden={isUploading.status ? false : true}
           />
         <Image.PreviewGroup >
