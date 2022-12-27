@@ -31,6 +31,19 @@
   font-size: 14px;
 }
 
+img:before {
+  content: ' ';
+  display: block;
+  /* position: absolute; */
+  height: 50px;
+  width: 50px;
+  background-image: url(./assets/noimg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
 :disabled:not(.ant-pagination-item-link) {
   background-color: grey !important;
   cursor: not-allowed;
@@ -715,7 +728,7 @@ th::before {
 
 }
 .ant-modal-content {
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
 

@@ -19,6 +19,7 @@ import { db } from "../pages/firebase";
 import { motion } from "framer-motion";
 import { uploadImageAsPromise, deleteFromStorage } from "./c";
 import { MotionConfig } from "framer-motion"
+import NOIMG from '../assets/noimg.jpg'
 import ProgressBar from "./Progress";
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
@@ -34,26 +35,17 @@ const Gallery = ({ setblogsLength, blogslength}) => {
   const [open, setOpen] = useState(false);
   const prev = useRef();
   const [num, setnum] = useState(null);
-  const [previewOpen, setPreviewOpen] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
-  const [previewTitle, setPreviewTitle] = useState("");
+  const [currentImg, setCurrentImg] = useState({
+    img:null,
+    id:null
+  })
   const [isUploading, setIsUploading] = useState({
     status: false,
     progress: 0
   })
   const [blogsAll, setBlogsAll] = useState([]);
   const [loading, isLoading] = useState(false);
-  const handleCancel = () => setPreviewOpen(false);
-  const handlePreview = async (file) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
-    }
-    setPreviewImage(file.url || file.preview);
-    setPreviewOpen(true);
-    setPreviewTitle(
-      file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
-    );
-  };
+ 
 
   useEffect(() => {
     const blogsRef = collection(db, "images");
@@ -115,50 +107,51 @@ const Gallery = ({ setblogsLength, blogslength}) => {
       />
    
 
-   {/* <Image
-        preview={false}
-        src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM="
-       hidden={isUploading.status ? false : true}
-      /> */}
+        <Image
+            preview={false}
+            src={NOIMG}
+            hidden={isUploading.status ? false : true}
+          />
         <Image.PreviewGroup >
    
           {blogsAll.length > 0 &&
+         
             blogsAll.map((blog, i) => {
               return (
-                <motion.div layout className="x" key={i} style={{"position": "relative"}}>
-                  
-                 
-                 <div type="primary" className="gallery-action-btn btn btn-danger" onClick={showModal}>  <DeleteOutlined /> Delete </div>
+                <motion.div layout className="x" key={i} style={{"position": "relative"}} >
+                 <div type="primary" className="gallery-action-btn btn btn-danger" onClick={() => {
+                  showModal()
+                  setCurrentImg({...currentImg, img:blog.blog_image_name, id:blog.id})
+                 }}>  <DeleteOutlined /> Delete </div>
 
                  <Modal
                   style={{"boxShadow": "none"}}
-                    title="Delete from gallery"
-                    open={open}
-                    onOk={() => {
-                      hideModal()
-                      deleteFromStorage(blog.blog_image_name)
+                  title={`Delete ${currentImg.img} ?`}
+                  open={open}
+                  onOk={() => {
+                    hideModal()
+                     deleteFromStorage(currentImg.img)
                       async function del() {
-                        await deleteDoc(doc(db, "images", blog.id));
+                        await deleteDoc(doc(db, "images", currentImg.id));
                       }
                       del()
-                      console.log(blog.blog_image_name, blog.id)
-                    }}
-                    
-                    onCancel={hideModal}
-                    okText="Delete"
-                    cancelText="Cancel"
-                  >
-                    <p>This action will delete file permantently</p>
-                  </Modal>
-                  <Image
-                
-                  preview={{
-                    maskClassName: "string",
-                    mask: <>
-                    <div className="button btn btn-primary gallery-action-btn"><EyeOutlined /> Preview</div>
-                    </>,
-                    maskClassName: "mask-info"
                   }}
+                  
+                  onCancel={hideModal}
+                  okText="Delete"
+                  cancelText="Cancel"
+                  >
+                    <p>This action will delete file permanently</p>
+                 </Modal>
+
+                  <Image
+                    preview={{
+                      maskClassName: "string",
+                      mask: <>
+                      <div className="button btn btn-primary gallery-action-btn"><EyeOutlined /> Preview</div>
+                      </>,
+                      maskClassName: "mask-info"
+                    }}
                     src={blog.blog_image}
                     key={i}
                     title={blog.blog_image_name}

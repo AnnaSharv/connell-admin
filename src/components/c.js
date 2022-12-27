@@ -65,10 +65,10 @@ export const uploadImageAsPromise = function (img, setImgList, dbName, setIsUplo
 export const deleteFromStorage = async function (file) {
   console.log(file)
   const storage = getStorage();
-  const desertRef = ref(storage, `${file}`);
+  const imgref = ref(storage, `${file}`);
 
 // Delete the file
-deleteObject(desertRef).then(() => {
+deleteObject(imgref).then(() => {
   console.log("File deleted successfully", file)
 }).catch((error) => {
   console.log("error", error)

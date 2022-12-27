@@ -9,6 +9,7 @@ import Copy from '../assets/icons/copy.svg'
 import Dots from '../assets/icons/dots.svg'
 import ModalDelete from './modalDelete';
 import ModalDuplicate from './modalDuplicate';
+import NOIMG from '../assets/noimg.jpg'
 
 
 
@@ -222,7 +223,12 @@ if(record.transactions_status === "archived") {
       {
         title: 'Image',
         // sorter:true,
-        render: (data) => <div style={{"cursor":"pointer"}}> {contextHolder} <img src={data.transactions_image} width="50px"/></div>, 
+        render: (data) => <div style={{"cursor":"pointer"}}> 
+          
+             {contextHolder} <img src={data.transactions_image} width="50px" alt=""/> 
+         
+       
+        </div>, 
         responsive: ['sm']
       },
       {

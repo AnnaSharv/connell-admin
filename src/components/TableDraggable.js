@@ -120,7 +120,7 @@ const TableDraggable = (props) => {
     {
       title: 'Image',
     //   dataIndex: "member_img",
-      render: (data) => <img src={data.blog_image} alt={data.blog_image_name} style={{"width":"50px"}} />,
+      render: (data) => <img src={data.blog_image} alt="" style={{"width":"50px"}} />,
     },
     {
       title: 'Name',
